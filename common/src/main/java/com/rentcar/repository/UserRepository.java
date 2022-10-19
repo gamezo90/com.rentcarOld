@@ -11,9 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAll();
+
+    @Query(value = "select u from User u")
+    Optional<User> findByLogin(String login);
 }
