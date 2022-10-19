@@ -40,7 +40,7 @@ public class Discount {
     private Timestamp expirationDate;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @JsonBackReference
     private User user;
 }

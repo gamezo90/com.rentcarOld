@@ -56,7 +56,7 @@ public class Car {
     @Column
     private Double price;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
 
     @Column

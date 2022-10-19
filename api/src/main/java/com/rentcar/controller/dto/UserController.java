@@ -22,7 +22,7 @@ import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/rest/data/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserRepository repository;
