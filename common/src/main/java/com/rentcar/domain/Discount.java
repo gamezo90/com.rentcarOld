@@ -1,5 +1,6 @@
 package com.rentcar.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.Cache;
@@ -37,5 +38,10 @@ public class Discount {
 
     @Column(name = "expiration_date")
     private Timestamp expirationDate;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
 }
 

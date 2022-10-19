@@ -1,5 +1,6 @@
 package com.rentcar.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -36,4 +37,13 @@ public class Order {
     @Column(name = "expiration_date")
     private Timestamp expirationDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    @JsonBackReference
+    private Car car;
 }

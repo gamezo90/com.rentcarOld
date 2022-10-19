@@ -1,5 +1,6 @@
 package com.rentcar.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
@@ -24,4 +25,9 @@ public class Credentials {
 
     @Column(name = "user_email")
     private String userEmail;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
 }

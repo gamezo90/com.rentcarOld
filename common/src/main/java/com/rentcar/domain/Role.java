@@ -1,6 +1,7 @@
 package com.rentcar.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,6 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Data
 @Entity
@@ -33,11 +35,12 @@ public class Role {
     @JsonIgnore
     private Timestamp modificationDate;
 
-//    @ManyToMany
-//    @JoinTable(name = "l_role_user",
-//            joinColumns = @JoinColumn(name = "role_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id")
-//    )
-//    @JsonIgnoreProperties("roles")
-//    private Set<User> users;
+    @ManyToMany
+    @JoinTable(name = "l_role_user",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonIgnoreProperties("roles")
+    private Set<User> users;
 }
+

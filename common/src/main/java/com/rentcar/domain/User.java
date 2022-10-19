@@ -3,20 +3,15 @@ package com.rentcar.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.rentcar.domain.Gender;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NamedQuery;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,10 +29,10 @@ import java.util.Set;
 @Data
 @Entity
 @EqualsAndHashCode(exclude = {
-        "roles", "orders", "info"
+        "roles", "orders", "credentials", "discount", "cars"
 })
 @ToString(exclude = {
-        "roles", "orders", "info"
+        "roles", "orders", "credentials", "discount", "cars"
 })
 @Table(name = "users")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -66,7 +61,6 @@ public class User {
     @JsonIgnore
     private Boolean isBanned;
 
-    /*wadwada*/
     @Column(name = "is_deleted")
     @JsonIgnore
     private Boolean isDeleted;
@@ -82,18 +76,29 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender = Gender.NOT_SELECTED;
 
-//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JsonIgnoreProperties("users")
-//    private Set<HibernateRole> roles;
-//
-//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @JsonManagedReference
-//    private Set<HibernateShopOrder> orders;
-//
-//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//    @JsonManagedReference
-//    private HibernateMedicalInfo info;
+
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Credentials credentials;
+
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Discount discount;
+
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("users")
+    private Set<Role> roles;
+
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Order> orders;
+
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Car> cars;
 }
