@@ -54,15 +54,7 @@ public class User {
     @Column
     private String surname;
 
-    @Column
-    private Timestamp birth;
-
-    /*null, true, false*/
-    @Column(name = "is_deleted")
-    @JsonIgnore
-    private Boolean isDeleted;
-
-    @Column(name = "creation_date")
+    @Column(name = " creation_date")
     @JsonIgnore
     private Timestamp creationDate;
 
@@ -70,16 +62,20 @@ public class User {
     @JsonIgnore
     private Timestamp modificationDate;
 
-    /*0, null*/
-    @Column
-    private Double weight;
+    @Column(name = "is_banned")
+    @JsonIgnore
+    private Boolean isBanned;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "login", column = @Column(name = "user_login")),
-            @AttributeOverride(name = "password", column = @Column(name = "user_password"))
-    })
-    private Credentials credentials;
+    @Column(name = "is_deleted")
+    @JsonIgnore
+    private Boolean isDeleted;
+
+    @Column
+    private String region;
+
+    @Column
+    @JsonIgnore
+    private Timestamp birthday;
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
