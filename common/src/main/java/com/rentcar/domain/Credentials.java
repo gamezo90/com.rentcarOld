@@ -1,22 +1,27 @@
 package com.rentcar.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import javax.persistence.*;
 
 @Data
-@Embeddable
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "credentials")
+@org.springframework.cache.annotation.Cacheable("credentials")
+@javax.persistence.Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Credentials {
 
-    private String login;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @JsonIgnore
-    private String password;
+    @Column(name = "user_login")
+    private String userLogin;
+
+    @Column(name = "user_password")
+    private String userPassword;
+
+    @Column(name = "user_email")
+    private String userEmail;
 }

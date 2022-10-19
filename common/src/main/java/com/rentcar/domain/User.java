@@ -96,5 +96,4 @@ public class User {
 //    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 //    @JsonManagedReference
 //    private HibernateMedicalInfo info;
-
 }
