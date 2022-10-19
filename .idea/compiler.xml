@@ -15,7 +15,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api" options="-parameters" />
-      <module name="com.rentcar" options="-parameters" />
+      <module name="com.rentcar" options="" />
       <module name="common" options="-parameters" />
     </option>
   </component>
