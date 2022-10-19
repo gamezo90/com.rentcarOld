@@ -35,4 +35,13 @@ public class UserController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<Object> findByLogin() {
+
+        return new ResponseEntity<>(
+                Collections.singletonMap("result", repository.findByLogin("JDBC")),
+                HttpStatus.OK
+        );
+    }
 }
