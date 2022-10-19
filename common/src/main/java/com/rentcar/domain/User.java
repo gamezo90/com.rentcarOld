@@ -66,6 +66,7 @@ public class User {
     @JsonIgnore
     private Boolean isBanned;
 
+    /*wadwada*/
     @Column(name = "is_deleted")
     @JsonIgnore
     private Boolean isDeleted;
