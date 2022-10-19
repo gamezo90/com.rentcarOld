@@ -42,7 +42,7 @@ import java.util.Set;
 @Table(name = "users")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Cacheable
-public class HibernateUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,29 +81,22 @@ public class HibernateUser {
     })
     private Credentials credentials;
 
-//    @Column(name = "user_login")
-//    private String userLogin;
-//
-//    @Column(name = "user_password")
-//    @JsonIgnore
-//    private String userPassword;
-
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private Gender gender = Gender.NOT_SELECTED;
 
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("users")
-    private Set<HibernateRole> roles;
-
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<HibernateShopOrder> orders;
-
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private HibernateMedicalInfo info;
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JsonIgnoreProperties("users")
+//    private Set<HibernateRole> roles;
+//
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<HibernateShopOrder> orders;
+//
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private HibernateMedicalInfo info;
 }
