@@ -8,9 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "credentials")
-@org.springframework.cache.annotation.Cacheable("credentials")
-@javax.persistence.Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+
 public class Credentials {
 
     @Id

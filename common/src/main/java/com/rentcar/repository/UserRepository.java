@@ -17,6 +17,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAll();
+    @Query(value = "select * from rentcar.users", nativeQuery = true)
+    List<User> findAkk();
 
     @Query(value = "select u from User u")
     Optional<User> findByLogin(String login);

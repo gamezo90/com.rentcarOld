@@ -9,20 +9,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -77,28 +64,35 @@ public class User {
     private Gender gender = Gender.NOT_SELECTED;
 
 
+//    @Embedded
+//    @AttributeOverrides({
+//            @AttributeOverride(name = "login", column = @Column(name = "user_login")),
+//            @AttributeOverride(name = "password", column = @Column(name = "user_password"))
+//    })
+//    private Credentials credentials;
+
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Credentials credentials;
-
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Discount discount;
-
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("users")
-    private Set<Role> roles;
-
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Order> orders;
-
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JsonManagedReference
-    private Set<Car> cars;
+//
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Discount discount;
+//
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JsonIgnoreProperties("users")
+//    private Set<Role> roles;
+//
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<Order> orders;
+//
+//    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+//    @JsonManagedReference
+//    private Set<Car> cars;
 }

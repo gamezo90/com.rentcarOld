@@ -36,6 +36,16 @@ public class UserController {
         );
     }
 
+    @GetMapping("/test1")
+    public ResponseEntity<Object> findAkk() {
+
+        return new ResponseEntity<>(
+                Collections.singletonMap("result", repository.findAkk()),
+                HttpStatus.OK
+        );
+    }
+
+
     @GetMapping("/test")
     public ResponseEntity<Object> findByLogin() {
 
